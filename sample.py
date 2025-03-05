@@ -77,6 +77,29 @@ elif _mname == 'v2':
     write_ratings = True
     write_work = True
 
+    itos_dict = {}
+    itos_dict[EOT] = 'EOT'
+    itos_dict[1] = 'R1'
+    itos_dict[2] = 'R2'
+    itos_dict[3] = 'R3'
+    itos_dict[4] = 'R4'
+    itos_dict[5] = 'R5'
+    itos_dict[CML] = 'ChangeMyLife'
+    itos_dict[GIFT] = 'Gift'
+    itos_dict[ASSIGN] = 'Assign'
+    itos_dict[PERMAP] = 'PERMA-P'
+    itos_dict[PERMAE] = 'PERMA-E'
+    itos_dict[SURPRISE] = 'Surprise'
+    itos_dict[WEIRD] = 'Weird'
+    itos_dict[BEST] = 'Best'
+    itos_dict[WORST] = 'Worst'
+    itos_dict[DISGUST] = 'Disgust'
+    itos_dict[EROTIC] = 'Erotic'
+    itos_dict[NORATE] = 'NoRate'
+    itos_dict[ACCENT] = '+'
+    itos_dict[REVERSE] = 'REV'
+    itos_dict[FIM] = 'FIM'
+    itos_dict[FIM2] = 'FIM2'
 
 device = "cpu"
 dtype = "float16"

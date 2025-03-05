@@ -10,14 +10,20 @@ booktitles = streamlit_dict['titles']
 titles_to_tokens = streamlit_dict['titles_to_token']
 tokens_to_titles = {v:k for k,v in titles_to_tokens.items()}
 
-addtl_tokens_dict= {}
-addtl_tokens_dict[0] ='[EOT]'
-addtl_tokens_dict[1] = 'R1'
-addtl_tokens_dict[2] = 'R2'
-addtl_tokens_dict[3] = 'R3'
-addtl_tokens_dict[4] = 'R4'
-addtl_tokens_dict[5] = 'R5'
+# find a book that includes the phrase
+def find_book(phrase):
+    for title in booktitles:
+        if phrase in title:
+            return title
+    return None
 
+book = find_book("Siddhartha")
+siddhartha_token = titles_to_tokens[book]
+
+book = find_book("Zen and the Art of Motorcycle Maintenance")
+motorcycle_token = titles_to_tokens[book]
+
+print(book,motorcycle_token)
 
 
 
@@ -29,8 +35,8 @@ length = 20
 def itos(x):
     if x<sample.OFFSET:
         title = "[]"
-        if x in addtl_tokens_dict:
-            title = addtl_tokens_dict[x]
+        if x in sample.itos_dict:
+            title = "["+sample.itos_dict[x]+"]" 
     else:
         work = x-sample.OFFSET
         if work in tokens_to_titles:
@@ -42,12 +48,15 @@ def itos(x):
 print("Loading model...")
 model = sample.load_model()
 
-context = [0]
+context = [0,5,sample.OFFSET+motorcycle_token]
 
-print("Generating trajectory...")
-y = sample.generate_trajecory(model,context,temperature = temperature,length=length)
-tlist = y.tolist()
+for i in range(10):
+    print("Generating trajectory ",i)
+    y = sample.generate_trajecory(model,context,temperature = temperature,length=length)
+    tlist = y.tolist()
 
-for idx,token in enumerate(tlist):
-    title = itos(token)
-    print(token,title)
+    for idx,token in enumerate(tlist):
+        title = itos(token)
+        #print(token,title)
+        print(title, end=';')
+    print("\n------")
