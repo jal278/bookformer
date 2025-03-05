@@ -1,4 +1,3 @@
-
 # code for read in ratings into memory...
 if False:
     fname = base_dir + '/interactions_proc_filtered_new_merged.csv'
