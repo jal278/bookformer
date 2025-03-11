@@ -1,10 +1,6 @@
-# seeing like a state
-# alchemy
-# already free
-
 import streamlit as st
 import pickle
-import transformational_sample
+import sample
 import numpy as np
 
 
@@ -54,10 +50,10 @@ traj_clicked = st.button('Simulate Trajectory')
 traj_text = st.text_area("Trajectory", "")
 
 def itos(x):
-    if x<transformational_sample.OFFSET:
+    if x<sample.OFFSET:
         title = "[]"
     else:
-        work = x-transformational_sample.OFFSET
+        work = x-sample.OFFSET
         if work in tokens_to_titles:
             title = tokens_to_titles[work]
         else:
@@ -67,59 +63,59 @@ def itos(x):
 
 if recs_clicked or traj_clicked:
     if "model" not in st.session_state.keys():
-        st.session_state["model"] = transformational_sample.load_model()
+        st.session_state["model"] = sample.load_model()
     model = st.session_state["model"]
     all_context = [0]
 
     for item in options:
         context = []
-        if transformational_sample._do_ratings:
+        if sample._do_ratings:
             context.append(5)
-        context.append(titles_to_tokens[item]+transformational_sample.OFFSET)
+        context.append(titles_to_tokens[item]+sample.OFFSET)
         all_context.append(context)
 
     context = []
     if cml:
         for i in range(accent_number):
-            context.append(transformational_sample.ACCENT)
-        context.append(transformational_sample.CML)
+            context.append(sample.ACCENT)
+        context.append(sample.CML)
     if permap:
         for i in range(accent_number):
-            context.append(transformational_sample.ACCENT)
-        context.append(transformational_sample.PERMAP)
+            context.append(sample.ACCENT)
+        context.append(sample.PERMAP)
     if permae:
         for i in range(accent_number):
-            context.append(transformational_sample.ACCENT)
-        context.append(transformational_sample.PERMAE)
+            context.append(sample.ACCENT)
+        context.append(sample.PERMAE)
     if surprise:
         for i in range(accent_number):
-            context.append(transformational_sample.ACCENT)
-        context.append(transformational_sample.SURPRISE)
+            context.append(sample.ACCENT)
+        context.append(sample.SURPRISE)
 
     if erotic:
         for i in range(accent_number):
-            context.append(transformational_sample.ACCENT)
-        context.append(transformational_sample.EROTIC)
+            context.append(sample.ACCENT)
+        context.append(sample.EROTIC)
 
     if best:
         for i in range(accent_number):
-            context.append(transformational_sample.ACCENT)
-        context.append(transformational_sample.BEST)
+            context.append(sample.ACCENT)
+        context.append(sample.BEST)
 
     if worst:
         for i in range(accent_number):
-            context.append(transformational_sample.ACCENT)
-        context.append(transformational_sample.WORST)
+            context.append(sample.ACCENT)
+        context.append(sample.WORST)
 
     if gift:
         for i in range(accent_number):
-            context.append(transformational_sample.ACCENT)
-        context.append(transformational_sample.GIFT)
+            context.append(sample.ACCENT)
+        context.append(sample.GIFT)
 
     if weird:
         for i in range(accent_number):
-            context.append(transformational_sample.ACCENT)
-        context.append(transformational_sample.WEIRD)
+            context.append(sample.ACCENT)
+        context.append(sample.WEIRD)
 
     if rating_5:
         context.append(5)
@@ -149,7 +145,7 @@ if recs_clicked or traj_clicked:
     if recs_clicked:
         context = all_context
         if accentuate_end or accentuate_history:
-            if not transformational_sample._do_ratings:
+            if not sample._do_ratings:
                 if accentuate_end:
                     dummy_context = context[:-1]
                 if accentuate_history:
@@ -166,10 +162,10 @@ if recs_clicked or traj_clicked:
             context = unfold_context(context)
             dummy_context = unfold_context(dummy_context)
 
-            probs,probs_un,probs_0 = transformational_sample.accentuated_recs(model,context,dummy_context)
+            probs,probs_un,probs_0 = sample.accentuated_recs(model,context,dummy_context)
         else:
             context = unfold_context(context)
-            probs = transformational_sample.get_next_book_probs(model,context,zero_out_prev=True,temperature = 1.0)
+            probs = sample.get_next_book_probs(model,context,zero_out_prev=True,temperature = 1.0)
 
         num = 20
         top = list(np.argsort(probs)[-num:])
@@ -185,7 +181,7 @@ if recs_clicked or traj_clicked:
         context = all_context
         context = unfold_context(context)
 
-        y = transformational_sample.generate_trajecory(model,context,temperature = temperature,length=20)
+        y = sample.generate_trajecory(model,context,temperature = temperature,length=20)
         tlist = y.tolist()
         st.write(tlist)
         for idx,token in enumerate(tlist):
