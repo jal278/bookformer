@@ -3,6 +3,8 @@ import json
 import pickle
 from collections import defaultdict
 from datetime import datetime
+import os
+from config import data_dir
 
 
 def print_in_chunks(review,chunk_size=80):
@@ -15,9 +17,9 @@ def print_in_chunks(review,chunk_size=80):
 
 #connect to db
 import sqlite3
-conn = sqlite3.connect('gread_reviews.db')
+conn = sqlite3.connect(os.path.join(data_dir, 'gread_reviews.db'))
 cur = conn.cursor()
-cur.execute("ATTACH DATABASE 'ratings.db' AS ratings")
+cur.execute(f"ATTACH DATABASE '{os.path.join(data_dir, 'ratings.db')}' AS ratings")
 
 
 # %%
