@@ -1,5 +1,4 @@
-base_dir = '/Users/joel/Downloads/reviews'
-data_dir = '/Users/joel/code/examples'
+from config import base_dir, data_dir
 
 import pickle
 import gzip
@@ -208,7 +207,7 @@ class goodreads_analysis:
 
 
         for book,num in best_books.items():
-            title = greads.titles[book]
+            title = self.titles[book]
             rc= self.cached_review_count[book]
             unnormalized_review_count[book] = num
             #normalized_review_count[book] = num
