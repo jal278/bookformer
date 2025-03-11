@@ -10,10 +10,14 @@ import tiktoken
 from importlib import reload
 import model
 from model import GPTConfig, GPT
+from config import model_dir
 
 _mname = 'norate-large'
 _mname = 'v1'
 _mname = 'v2'
+
+# Define the specific model directory within the main model directory
+model_specific_dir = os.path.join(model_dir, "out_colab_v2_100m_reg")
 
 if _mname == 'vanilla':
     _do_ratings = True
@@ -115,13 +119,9 @@ ptdtype = {'float32': torch.float32, 'bfloat16': torch.bfloat16, 'float16': torc
 ctx = nullcontext() if device_type == 'cpu' else torch.amp.autocast(device_type=device_type, dtype=ptdtype)
 
 
-model_dir = "./out_colab_v2_100m_reg"
-
-
-
 def load_model():
     # init from a model saved in a specific directory
-    ckpt_path = os.path.join(model_dir, 'ckpt.pt')
+    ckpt_path = os.path.join(model_specific_dir, 'ckpt.pt')
     checkpoint = torch.load(ckpt_path, map_location=device)
     gptconf = GPTConfig(**checkpoint['model_args'])
     model = GPT(gptconf)

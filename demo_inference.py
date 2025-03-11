@@ -1,10 +1,11 @@
 import pickle
 import sample
 import numpy as np
+from config import data_dir, model_dir
 
 # load from pickle
 print("Loading streamlit dict...")
-streamlit_dict = pickle.load(open('streamlit_dict.pkl', 'rb'))
+streamlit_dict = pickle.load(open(f'{data_dir}/streamlit_dict.pkl', 'rb'))
 booktitles = streamlit_dict['titles']
 titles_to_tokens = streamlit_dict['titles_to_token']
 tokens_to_titles = {v:k for k,v in titles_to_tokens.items()}
