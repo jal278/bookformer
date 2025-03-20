@@ -1,7 +1,7 @@
+import numpy as np
 import embed_reviews
 from embed_reviews import get_embedding, remove_quotes
 import pickle
-import spacy
 import random
 from config import data_dir, base_dir, openai_api_key
 from sklearn.model_selection import train_test_split
@@ -11,8 +11,6 @@ from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.neighbors import KNeighborsClassifier
 
-
-nlp = spacy.load('en_core_web_sm')
 model = "text-embedding-3-small"
 m_abbrev = "3s"
 
