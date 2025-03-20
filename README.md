@@ -25,4 +25,10 @@ python sql_browser.py
 
 python embed_reviews.py
 
+## to train a logistic regression classifier from pos/negative text examples
 
+python train_classifier.py
+
+## to apply saved classifier across an embedding file
+
+python apply_classifier.py <embedding file> <classifier_file> <output extension>
