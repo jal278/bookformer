@@ -4,3 +4,9 @@
 base_dir = '/Users/joel/Downloads/reviews'
 data_dir = '/Users/joel/code/examples' 
 model_dir = '/Users/joel/code/bookformer'
+
+try:
+    from _secrets import openai_api_key
+except ImportError:
+    print("No secrets file found, no openai key will be set")
+    openai_api_key = None
