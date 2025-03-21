@@ -179,7 +179,8 @@ if __name__=='__main__' and mode=='sentence':
     m_abbrev = "3s"
     batch_size = 300
 
-    # TODO: make this a command line argument; right now 
+    # TODO: make this a command line argument; right now you manually have to change this as you
+    # iterate through the reviews; it takes several days to embed all reviews (or at least it did last time)
     num = 0   # 0 for first X reviews, 1 for next X reviews, etc.
 
     # filename for storing embeddings in pkl file
@@ -260,6 +261,9 @@ if __name__=='__main__' and mode=='sentence':
     # save the done list and embeddings
     pickle.dump({'done':done_list}, open(done_file, 'wb'))
     pickle.dump({'done':done_list,'emb':sent_embeddings}, open(emb_file, 'wb'))
+
+    # the done list is only important as a way to embed each review once; it is not used after the process is done
+    # but of course all the embedding files are important
 
 
 

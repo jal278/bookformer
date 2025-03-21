@@ -4,6 +4,7 @@
 base_dir = '/Users/joel/Downloads/reviews'
 data_dir = '/Users/joel/code/examples' 
 model_dir = '/Users/joel/code/bookformer'
+embedding_dir = '/Users/joel/code/examples/embeddings'
 
 try:
     from _secrets import openai_api_key
