@@ -8,6 +8,12 @@ import json
 from collections import Counter
 from goodreads import greads
 
+"""
+Simple script to run a classifier on a subset of review embeddings, then
+look through the text reviews to find sentences that match the classifier scores.
+
+A way to get a sense of how the classifier is qualitatively working.
+"""
 
 embeddings_file = 'review-sent-embeddings-3s.pkl'
 classifier_file = 'vec-clf-m3-cml5.pkl'
