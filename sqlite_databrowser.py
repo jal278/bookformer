@@ -109,5 +109,5 @@ while rev_idx < len(revs) and rat_idx < len(ratings) and rev_idx < max_reviews_t
         date = ratings[rat_idx][3]
         date = datetime.fromtimestamp(date).isoformat()
         #print(ratings[rat_idx][:])
-        print(f"date: {date} rating: {rating}, title: {title}, author: {author}")
+        print(f"date: {date} rating: {rating}, title: {title}, author: {author}, bid: {ratings[rat_idx][4]}")
         rat_idx += 1
