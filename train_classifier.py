@@ -10,6 +10,7 @@ from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.neighbors import KNeighborsClassifier
+from config import classifier_dir
 
 model = "text-embedding-3-small"
 m_abbrev = "3s"
@@ -25,6 +26,7 @@ neg = []
 
 # file that has positive/negative examples in plain text
 fname = "classifier_changed_my_life.txt"
+out_name = 'vec-clf-changed-my-life.pkl'
 #fname = "classifier_worst_book.txt"
 #fname = "classifier_gift.txt"
 #fname = "classifier_assigned.txt"
@@ -36,7 +38,7 @@ fname = "classifier_changed_my_life.txt"
 #fname = "classifier_best.txt"
 #fname = "classifier_weird.txt"
 
-lines = open("classifiers/"+fname,"r").read().split("\n")[:-1]
+lines = open(classifier_dir+"/training/"+fname,"r").read().split("\n")[:-1]
 # map all the text examples in the file to embeddings (the classifier works on embeddings)
 for line in lines:
     line = line.strip()
@@ -77,5 +79,5 @@ score = clf.score(X_test, y_test)
 print(score)
 
 # save the classifier
-pickle.dump(clf, open('classifier_{}.pkl'.format(fname), 'wb'))
+pickle.dump(clf, open(classifier_dir+"/models/"+out_name, 'wb'))
 
