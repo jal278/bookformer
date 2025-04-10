@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# NOTE for this to work you need to point the do_transformation.sh calls
+# to where the classifier files live -- I think something
+# like /data/jlehman/classifiers/models
+# e.g. something like ./do_transformation.sh /data/jlehman/classifiers/models/vec-clf-m3-cml4.pkl cml
+# which would invoke the 'change my life classifer' on all the sentence-embeddings files
+
 # only do following lines if False
 if [ "True" = "False" ]; then
 ./do_transformation.sh vec-clf-m3-cml4.pkl cml 
@@ -11,6 +17,7 @@ if [ "True" = "False" ]; then
 ./do_transformation.sh vec-clf-m3-surprise.pkl surprise
 ./do_transformation.sh vec-clf-m3-wbe.pkl wbe
 fi
+
 
 #./do_transformation.sh "str:The weirdest book I have ever read." weird
 #./do_transformation.sh "str:A literary page-turned." lpt
